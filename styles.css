@@ -38,7 +38,7 @@
     background-color: var(--calculatorC);
   }
   
-  .screen {
+  #screen {
     padding: 10px 20px;
     border: 2px var(--borderC) solid;
     border-radius: 5px;
