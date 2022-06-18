@@ -41,6 +41,7 @@ allOperations.forEach(opBtn => opBtn.addEventListener('click', () => specifyOp(o
 delBtn.addEventListener('click', deletePrevious);
 equalsBtn.addEventListener('click', evaluate);
 allClearBtn.addEventListener('click', allClear);
+decimalBtn.addEventListener('click', makeDecimal);
 
 
 /**
@@ -67,8 +68,8 @@ function displayNumber(number) {
         allClear();
         screenReset();
     }
-    // operandOne has been specified. The call to this function must therefore be meant for operandTwo
-    if (operandOne !== '') {
+    // since an operation has been specified, the call to this function must therefore be meant for operandTwo
+    if (appliedOperation !== null) {
         operandTwoTrack += number;
     }
     // update display
@@ -80,12 +81,13 @@ function deletePrevious() {
     if (evaluated) {
         return;
     }
+    let content = screenView.textContent;
     // check if the prev char represents an operator
-    if (operators.includes(screenView.textContent.charAt(screenView.textContent.length-1))) {
+    if (operators.includes(content.charAt(content.length-1))) {
         appliedOperation = null;
     }
     // if its just a number, remove it
-    screenView.textContent = screenView.textContent.slice(0,-1);
+    screenView.textContent = content.slice(0,-1);
     // revert to default display
     if (screenView.textContent === '') {
         allClear();
@@ -126,6 +128,23 @@ function evaluate() {
     operandTwo = '';
     operandTwoTrack = '';
     evaluated = true;
+}
+
+function makeDecimal() {
+    let content = screenView.textContent
+    // invalid when prev is an operator and when number that will be the first operand is already a decimal
+    if ((appliedOperation === null && content.includes('.')) || operators.includes(content.charAt(content.length-1))) {
+        return;
+    }
+
+    screenView.textContent += '.';
+    if (operandTwoTrack !== '') {
+        if (operandTwoTrack.includes('.')) {
+            return;
+        }
+        operandTwoTrack += '.';
+    }
+    evaluated = false;
 }
 
 // display up to 10dp
@@ -171,24 +190,25 @@ function divide(a, b) {
 }
 
 function power(a, b) {
-    let ret = 1;
-    if (b === 0) {
-        return ret;
-    }
-    if (a === 0) {
-        return 0;
-    }
+    return Math.pow(a, b);
+    // let ret = 1;
+    // if (b === 0) {
+    //     return ret;
+    // }
+    // if (a === 0) {
+    //     return 0;
+    // }
 
-    if (b > 0) {
-        for (let i = 0; i < b; i++) {
-            ret *= a;
-        }
-    } else {
-        for (let i = 0; i < b; i++) {
-            ret /= a;
-        }
-    }
-    return ret;
+    // if (b > 0) {
+    //     for (let i = 0; i < b; i++) {
+    //         ret *= a;
+    //     }
+    // } else {
+    //     for (let i = 0; i < b; i++) {
+    //         ret /= a;
+    //     }
+    // }
+    // return ret;
 }
 
 function operate(operator, a, b) {
