@@ -1,14 +1,4 @@
 /**
- * To do:
- * 4. settle point
- * 5. settle toggling of sign
- * 6. css
- * 
- */
-
-
-
-/**
  * State variables
  * Numbers represented as string to avoid integer overflow
  */
@@ -18,7 +8,6 @@ let operandTwo = '';
 let appliedOperation = null;
 let evaluated = true;
 let operandTwoTrack = '';
-// NaN check
 
 /**
  * Access buttons
@@ -42,6 +31,7 @@ delBtn.addEventListener('click', deletePrevious);
 equalsBtn.addEventListener('click', evaluate);
 allClearBtn.addEventListener('click', allClear);
 decimalBtn.addEventListener('click', makeDecimal);
+toggleSignBtn.addEventListener('click', makeNegative);
 
 
 /**
@@ -131,9 +121,10 @@ function evaluate() {
 }
 
 function makeDecimal() {
-    let content = screenView.textContent
+    let content = screenView.textContent;
     // invalid when prev is an operator and when number that will be the first operand is already a decimal
     if ((appliedOperation === null && content.includes('.')) || operators.includes(content.charAt(content.length-1))) {
+        alert("Invalid placement of '.'")
         return;
     }
 
@@ -147,24 +138,14 @@ function makeDecimal() {
     evaluated = false;
 }
 
+function makeNegative() {
+    alert("Coming Soon!");
+}
+
 // display up to 10dp
 function roundOff(number) {
     return Math.round(number * 10000000000) / 10000000000;
 }
-
-
-
-// window.addEventListener('keydown', userKeyboardInput);
-
-// function userKeyboardInput(e) {
-//     // e.target vs e.key
-//     // to add: is user keys on keyboard
-//     if (0 <=e.key && e.key <= 9) {
-//         addNum(e.key);
-//     } else if (e.key === '.') {
-//         addPoint();
-//     } else if (e.key ===)
-// }
 
 /**
  * Operations
