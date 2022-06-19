@@ -1,9 +1,13 @@
 :root {
     --backgroundC: #ffffff;
     --fontC: #222;
-    --borderC: #333;
-    --screenC: #eee;
-    --calculatorC: #aaa;
+    --borderC: rgb(0, 0, 0);
+    --screenC: rgb(249, 249, 249);
+    --calculatorC: linear-gradient(#403b4a, #e9c7bb);
+    /*--calculatorC: rgb(177, 170, 170);*/
+    --btnC: rgb(236, 236, 236);
+    --btnHoverC: #ddd;
+    --btnActiveC: #ccc;
   }
   
   html {
@@ -27,15 +31,18 @@
     font-family: inherit;
     font-size: inherit;
     cursor: pointer;
+    height: 68px;
+    width: 72px;
   }
   
   
   .calculator {
-    width: 400px;
+    width: 333px;
     border: 2px var(--borderC) solid;
-    border-radius: 15px;
-    padding: 20px;
-    background-color: var(--calculatorC);
+    border-radius: 20px;
+    padding: 30px 20px 20px 20px;
+    /*background-color: var(--calculatorC); */
+    background: var(--calculatorC);
   }
   
   #screen {
@@ -47,21 +54,55 @@
     text-align: right;
     word-wrap: break-word;
     word-break: break-all;
+    min-height: 77px;
+    font-size: 40px;
   }
   
   
-  .buttons {
+  .buttons-layout {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
+    /* centering within their own grid cell */
+    justify-items: center; 
   }
-  
 
-/*   individual buttons
-  .btn {
+  .numbers,
+  #toggle-sign,
+  #dot {
     padding: 20px;
-    border: 2px var(--border) solid;
-    border-radius: 5px;
-    background-color: var(--btn);
+    border: 2px var(--borderC) solid;
+    border-radius: 10px;
+    background-color: var(--btnC);
     font-size: 20px;
-  } */
+  } 
+
+  .operators,
+  #delete,
+  #all-clear,
+  #equal {
+    padding: 20px;
+    border: 2px var(--borderC) solid;
+    border-radius: 50%;
+    background-color: var(--btnC);
+    font-size: 20px;
+  }
+
+button:hover,
+#toggle-sign:hover,
+#dot:hover,
+#delete:hover,
+#all-clear:hover,
+#equal:hover {
+    background-color: var(--btnHoverC);
+}
+
+button:active,
+#toggle-sign:active,
+#dot:active,
+#delete:active,
+#all-clear:active,
+#equal:active {
+    background-color: var(--btnActiveC);
+}
+

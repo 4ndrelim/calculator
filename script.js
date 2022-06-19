@@ -139,6 +139,7 @@ function makeDecimal() {
 }
 
 function makeNegative() {
+    // need to use a diff char to denote negative sign or alter implementation of specifyOp
     alert("Coming Soon!");
 }
 
